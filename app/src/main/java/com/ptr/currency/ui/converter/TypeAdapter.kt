@@ -10,8 +10,18 @@ import kotlinx.android.synthetic.main.item_type.view.*
 
 class TypeAdapter(val currencyList: ArrayList<String>, val context: Context) :
     RecyclerView.Adapter<CurrencyViewHolder>() {
+
+    var callback: Callback? = null
+    val clickListener = object : View.OnClickListener {
+        override fun onClick(v: View?) {
+            v?.let { callback?.onItemClicked(it) }
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
-        return CurrencyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_type, parent, false))
+        val v = LayoutInflater.from(context).inflate(R.layout.item_type, parent, false)
+        v.setOnClickListener(clickListener)
+        return CurrencyViewHolder(v)
     }
 
     override fun getItemCount(): Int {
@@ -19,9 +29,12 @@ class TypeAdapter(val currencyList: ArrayList<String>, val context: Context) :
     }
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
-        holder?.tvType?.text = currencyList.get(position)
+        holder.tvType?.text = currencyList.get(position)
     }
 
+    interface Callback {
+        fun onItemClicked(view: View)
+    }
 }
 
 class CurrencyViewHolder(v: View) : RecyclerView.ViewHolder(v) {

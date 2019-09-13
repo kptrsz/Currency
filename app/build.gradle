@@ -47,7 +47,13 @@ dependencies {
     // endregion
     // region Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     // endregion
+    // endregion
+    // region Retrofit 2
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit_coroutines_adapter_version"
+    implementation "com.squareup.retrofit2:converter-gson:$gson_converter_version"
     // endregion
     // region Testing
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
